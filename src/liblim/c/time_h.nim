@@ -1,4 +1,4 @@
-import std/time_t as tt
+import std/time_t as t
 
 {.push header:"<time.h>".}
 
@@ -22,3 +22,4 @@ proc asctime*(timeptr :ptr tm) :cstring
 proc ctime*(timer :ptr time_t) :cstring
 proc gmtime*(timer :ptr time_t) :ptr tm
 proc localtime*(timer :ptr time_t) :ptr tm
+proc strftime*(s:ptr char , maxsize:csize_t , format:cstring , timptr:ptr tm):csize_t
