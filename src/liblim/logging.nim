@@ -7,7 +7,7 @@ when defined(fileLog):
 proc print(f:File , msgType , str:string , color:ForegroundColor) =
   when not defined(noLog):
     when defined(fileLog):
-      let file = openFileStream(os.getAppDir() / "Log.txt" , fmWrite)
+      let file = open(getAppDir() / "Log.txt" , FileMode.fmWrite)
     else:
       let file = f
     var now = time(nil)
@@ -31,10 +31,18 @@ proc print(f:File , msgType , str:string , color:ForegroundColor) =
     f.styledWrite(color , msgType)
     f.styledWrite(fgWhite , " > ")
     f.styledWrite(color , str)
-    f.write("\n")
 
-proc printErr*(str:string) = stderr.print("Error" , str & " !\a" , fgRed)
-proc printLog*(str:string) = stdout.print("Log  " , str , fgGreen)
-proc printInfo*(str:string) = stdout.print("Info " , str , fgBlue)
-proc printWarn*(str:string) = stdout.print("Warn " , str & " !" , fgYellow)
-proc printDbg*(str:string) = stdout.print("Debug" , str , fgWhite)
+proc printErr*(str:string) = stderr.print("Error " , str & " !\a\n" , fgRed)
+proc printLog*(str:string) = stdout.print("Log   " , str & "\n" , fgGreen)
+proc printInfo*(str:string) = stdout.print("Info  " , str , fgBlue)
+proc printWarn*(str:string) = stdout.print("Warn  " , str & " !\n" , fgYellow)
+proc printDbg*(str:string) = stdout.print("Debug " , str & "\n" , fgWhite)
+
+proc printPromptBase(prompt , answer:string) =
+  stdout.print("Prompt" , prompt & "\n" , fgYellow)
+  stdout.styledWrite(fgYellow , "Answer " & answer & " ")
+proc printPrompt*(str:string):string =
+  printPromptBase(str , ">")
+  return stdin.readLine()
+proc printPrompt*(str , def :string):string =
+  printPromptBase(str , "[" & def & "] >")
