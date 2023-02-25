@@ -5,7 +5,7 @@ author        = "777shuang"
 description   = "Lim"
 license       = "GPL-3.0-or-later"
 srcDir        = "src"
-bin           = @["lim"]
+#bin           = @["lim"]
 
 
 # Dependencies
