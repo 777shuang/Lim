@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.1"
+version       = "0.1.2"
 author        = "777shuang"
 description   = "C language binding"
 license       = "MIT"
