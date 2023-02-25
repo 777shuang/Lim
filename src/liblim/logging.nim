@@ -34,7 +34,7 @@ proc print(f:File , msgType , str:string , color:ForegroundColor) =
 
 proc printErr*(str:string) = stderr.print("Error " , str & " !\a\n" , fgRed)
 proc printLog*(str:string) = stdout.print("Log   " , str & "\n" , fgGreen)
-proc printInfo*(str:string) = stdout.print("Info  " , str , fgBlue)
+proc printInfo*(str:string) = stdout.print("Info  " , str & "\n", fgBlue)
 proc printWarn*(str:string) = stdout.print("Warn  " , str & " !\n" , fgYellow)
 proc printDbg*(str:string) = stdout.print("Debug " , str & "\n" , fgWhite)
 
