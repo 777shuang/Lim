@@ -2,10 +2,11 @@
 
 version       = "0.1.0"
 author        = "777shuang"
-description   = "Lim"
-license       = "GPL-3.0-or-later"
+description   = "C language binding"
+license       = "MIT"
 srcDir        = "src"
-#bin           = @["lim"]
+installExt    = @["nim"]
+bin           = @["Lim"]
 
 
 # Dependencies
