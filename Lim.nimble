@@ -1,13 +1,11 @@
 # Package
 
-version       = "0.1.4"
+version       = "0.1.5"
 author        = "777shuang"
-description   = "C language binding"
+description   = "Lim compiler and library"
 license       = "MIT"
 srcDir        = "src"
-installExt    = @["nim"]
 bin           = @["Lim"]
-
 
 # Dependencies
 
