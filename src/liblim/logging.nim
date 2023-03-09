@@ -1,4 +1,4 @@
-import std/[terminal , strutils]
+import std/[terminal , strutils , options]
 import c/time_h
 
 when defined(fileLog):
@@ -38,11 +38,32 @@ proc printInfo*(str:string) = stdout.print("Info  " , str & "\n", fgBlue)
 proc printWarn*(str:string) = stdout.print("Warn  " , str & " !\n" , fgYellow)
 proc printDbg*(str:string) = stdout.print("Debug " , str & "\n" , fgWhite)
 
-proc printPromptBase(prompt , answer:string) =
+proc printPromptBase(prompt , answer:string):string =
   stdout.print("Prompt" , prompt & "\n" , fgYellow)
   stdout.styledWrite(fgYellow , "Answer " & answer & " ")
-proc printPrompt*(str:string):string =
-  printPromptBase(str , ">")
-  return stdin.readLine()
-proc printPrompt*(str , def :string):string =
-  printPromptBase(str , "[" & def & "] >")
+  return stdin.readLine
+
+proc printPrompt*(question:string):string = return printPromptBase(question , ">")
+
+const
+  yes = "Yes"
+  no = "No"
+
+proc printPromptBase_YN(question:string , def:string):Option[bool] =
+  var input = printPromptBase(question & "(" & yes & "/" & no & ")" , "[" & def & "] >").toLower.capitalizeAscii
+  echo input
+  if input == "":
+    input = def
+  proc compare(str :string):bool =
+    return input == str or input == str.substr(0 , 0)
+  if compare(yes):
+    return option(true)
+  if compare(no):
+    return option(false)
+  return none(bool)
+
+proc printPrompt*(question:string , def:bool):Option[bool] {.inline.} =
+  if def == true:
+   return printPromptBase_YN(question , yes)
+  else:
+   return printPromptBase_YN(question , no)
