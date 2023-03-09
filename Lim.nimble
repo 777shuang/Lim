@@ -5,6 +5,7 @@ author        = "777shuang"
 description   = "Lim compiler and library"
 license       = "MIT"
 srcDir        = "src"
+installExt    = @["nim"]
 bin           = @["Lim"]
 
 # Dependencies
