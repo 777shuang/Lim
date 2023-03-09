@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.5"
+version       = "0.1.6"
 author        = "777shuang"
 description   = "Lim compiler and library"
 license       = "MIT"
