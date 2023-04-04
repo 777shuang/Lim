@@ -12,20 +12,22 @@ proc print(f:File , msgType , str:string , color:ForegroundColor) =
       let file = f
     var now = time(nil)
     let local = localtime(now.addr)
+    proc align(num: int): string =
+      return num.intToStr.align(2 , '0')
     file.styledWrite(
       fgMagenta ,
       "[",
-      intToStr(local.tm_year + 1900) ,
+      align(local.tm_year + 1900) ,
       "/" ,
-      intToStr(local.tm_mon + 1) ,
+      align(local.tm_mon + 1) ,
       "/" ,
-      intToStr(local.tm_mday + 1) ,
+      align(local.tm_mday + 1) ,
       " " ,
-      intToStr(local.tm_hour) ,
+      align(local.tm_hour) ,
       ":" ,
-      intToStr(local.tm_min) ,
+      align(local.tm_min) ,
       ":" ,
-      intToStr(local.tm_sec) ,
+      align(local.tm_sec) ,
       "] "
     )
     f.styledWrite(color , msgType)
