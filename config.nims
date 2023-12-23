@@ -1,0 +1,2 @@
+--threads:on
+--app:gui
